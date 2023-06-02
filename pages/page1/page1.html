@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<link rel="stylesheet" href="../../index.css">
+<link rel="stylesheet" href="../../cjs/jquery.mCustomScrollbar.css" />
+<link href="../../fonts/font-awesome/css/all.css" rel="stylesheet">
+<script src="../../cjs/easeljs-0.8.2.min.js"></script> 
+<script src="../../cjs/tweenjs-0.6.2.min.js"></script> 
+<script src="../../cjs/preloadjs-0.6.2.min.js"></script> 
+<script src="../../cjs/soundjs-0.6.2.min.js"></script> 
+<script src="page.js"></script> 
+<script src="../../principal.js"></script> 
+<script src="../../cjs/jquery.min.js"></script> 
+<script src="../../cjs/jquery.imagemapster.js"></script> 
+<script src="../../cjs/jquery.mCustomScrollbar.concat.min.js"></script> 
+<script src="../../cjs/jquery-ui.min.js"></script> 
+<script src="../../cjs/jquery.ui.touch-punch.min.js"></script> 
+<script>
+	
+	
+var canvas, stage, exportRoot;
+function init() {
+	canvas = document.getElementById("canvas");
+	var loader = new createjs.LoadQueue(false);
+	loader.installPlugin(createjs.Sound);
+	loader.addEventListener("fileload", handleFileLoad);
+	loader.addEventListener("complete", handleComplete);
+	loader.addEventListener("progress", handleProgress);
+	loader.loadManifest(lib.properties.manifest);
+  $.getJSON("../../images/animaciones_atlas_.json", function(json) {
+      frames_animacion = json.frames;
+    });
+}
+function handleFileLoad(evt) {
+	if (evt.item.type == "image") { images[evt.item.id] = evt.result; }
+}
+function playSound(id, loop) {
+	createjs.Sound.play(id, createjs.Sound.INTERRUPT_EARLY, 0, 0, loop);
+}
+ancho_linea = 0;
+alto_linea = 10;
+max_ancho = 450;
+function handleProgress(evt) {
+	stage = new createjs.Stage(canvas);
+	var bordePadding = 2;
+    var borde = new createjs.Shape;
+    borde.graphics.beginFill("rgba(131,120,111,0.4)").drawRect(0, 0, max_ancho + bordePadding*2, alto_linea).endFill();
+    var linea_carga = new createjs.Shape();
+	linea_carga.graphics.beginFill("#009DDF").drawRect(0 + bordePadding,0 + bordePadding, ancho_linea, alto_linea - bordePadding*2).endFill();
+    progreso = Math.round(evt.loaded * max_ancho);
+	ancho_linea = progreso;
+	contenedor = new createjs.Container();
+	contenedor.x = 1240/2 - max_ancho/2;
+	contenedor.y = 495*4/5 - alto_linea/2;
+	contenedor.addChild(borde, linea_carga);
+	//stage.addChild(contenedor);
+	stage.update();
+}
+function handleComplete(evt) {
+	var queue = evt.target;
+	stage = new createjs.Stage(canvas);
+	createjs.Ticker.addEventListener("tick", stage);
+	/////Variables
+	sin_personaje = true;
+	globo_personaje = "Empecemos identificando la importancia del programa de bloqueo y etiquetado, las actividades en las que se debe aplicar y algunos conceptos asociados.";
+	pausas_audio = [[0,16406],[977,19347]];
+
+  coord_flecha_next = [900,100];
+
+  contenidos();	
+}
+</script>
+</head>
+<body onload="init();">
+<canvas id="canvas" width="1260" height="550"></canvas>
+<div id="instruccion_circulos" class="instruccion_circulos"> </div>
+<div class="c_principal c_8_6">
+  <h1 data-posabsbtn="170,320">Prevención del fraude</h1>
+  <div class="item_c">
+    <div class="txt_c">
+      <div class="cont_audio">
+        <div class="audio_c">
+          <audio controls style="margin-top: 15px;">
+            <source src="sounds/diap4.mp3" type="audio/mpeg">
+            Your browser does not support the audio tag. </audio>
+        </div>
+        <div class="subs_audio">
+          <div class="resaltado_especial">Un <span class="negrilla">modelo de prevención de fraudes</span> es el conjunto de políticas, procedimientos, normas, herramientas, roles y responsabilidades que fortalecen la Cultura Organizacional y se integran para prevenir, detectar, enfrentar y dar respuesta oportuna al fraude en la Entidad.</div>
+          <div>Las <span class="negrilla">técnicas de prevención de fraude </span>no garantizan que el fraude no se cometa, pero son la primera línea de actuación para <span class="negrilla">minimizar el riesgo</span>, por esto es importante identificar, medir, controlar y monitorear todos los eventos que puedan llevar a las organizaciones a tener un <span class="negrilla">riesgo de pérdida monetaria o reputacional y sanciones de los entes de control.</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="item_c"> <img src="images/diap4.png" height="250"> </div>
+</div>
+<div class="mas_personaje c_1">
+  <h1></h1>
+  <div class="item_c"></div>
+</div>
+<div class="c_principal c_2_6">
+  <h1 data-posabsbtn="700,220">Regulaciones relacionadas con el riesgo de fraude</h1>
+  <div class="item_c">
+    <h1></h1>
+  </div>
+  <div class="item_c" style="margin: 0 30px;">
+    <div class="txt_interno c_1">
+      <h1>Inicio</h1>
+      <div class="item_c">
+        <div class="cont_audio">
+          <div class="audio_c">
+            <audio controls style="margin-top: 15px;">
+              <source src="sounds/diap6a.mp3" type="audio/mpeg">
+              Your browser does not support the audio tag. </audio>
+          </div>
+          <div class="subs_audio"> La unidad de prevención de fraudes debe cumplir con varias regulaciones locales. </div>
+        </div>
+        <div class="instruccion_interna">Pasa el mouse sobre el dato de interés</div>
+        <div id="zona_sensible0" class="negrilla_sensible">
+          <p><i class="fad fa-comment-exclamation"></i></p>
+          <p>Dato de interés</p>
+        </div>
+        <div class='instruccion_interna'><span class='indica_instclic'></span>Pulsa los botones para ampliar la información.</div>
+      </div>
+    </div>
+    <div class="txt_interno c_3_2">
+      <h1>Circular Básica Jurídica de la SFC </h1>
+      <div class="item_c">
+        <div class="cont_audio">
+          <div class="audio_c">
+            <audio controls style="margin-top: 15px;">
+              <source src="sounds/diap7a.mp3" type="audio/mpeg">
+              Your browser does not support the audio tag. </audio>
+          </div>
+          <div class="subs_audio">La Circular Básica Jurídica de la Superintendencia Financiera de Colombia incluye la siguiente información:</div>
+        </div>
+        <div class="txt_c">
+          <div class="negrilla_sensible" id="zona_sensible1">Capítulo I </div>
+          <div class="negrilla_sensible" id="zona_sensible2">Capítulo II </div>
+          <div class="negrilla_sensible" id="zona_sensible3">Capítulo IX </div>
+          <div class="negrilla_sensible" id="zona_sensible4">Capítulo XII </div>
+        </div>
+      </div>
+      <div class="item_c"><img src="images/diap7.png" height="250"> </div>
+    </div>
+    <div class="txt_interno c_1_1">
+      <h1>Decreto 578 del MinCIT</h1>
+      <div class="item_c">
+        <div class="cont_audio">
+          <div class="audio_c">
+            <audio controls style="margin-top: 15px;">
+              <source src="sounds/diap8.mp3" type="audio/mpeg">
+              Your browser does not support the audio tag. </audio>
+          </div>
+          <div class="subs_audio">El Decreto 578 del MinCIT hace referencia a la protección de los derechos de los consumidores y regulación del control de calidad de bienes y servicios ofrecidos y prestados a la comunidad, así como la información que debe suministrarse al público en su comercialización.</div>
+        </div>
+      </div>
+      <div class="item_c"> <img src="images/diap8.png" height="300"> </div>
+    </div>
+  </div>
+</div>
+<div class="c_principal c_1">
+  <h1 data-posabsbtn="170,320">Tipología del fraude</h1>
+  <div class="item_c">
+    <div class="cont_audio">
+      <div class="audio_c">
+        <audio controls style="margin-top: 15px;">
+          <source src="sounds/diap10a.mp3" type="audio/mpeg">
+          Your browser does not support the audio tag. </audio>
+      </div>
+      <div class="subs_audio">Actualmente se pueden presentar los siguientes tipos de fraude: </div>
+    </div>
+    <div class="infografia"> <img src="images/diap10.png" height="250">
+      <map data-restriccion="no">
+        <area id="zona_sensible5" shape="circ" coords="82,112,70">
+        <area id="zona_sensible6" shape="circ" coords="288,112,70">
+        <area id="zona_sensible7" shape="circ" coords="498,112,70">
+        <area id="zona_sensible8" shape="circ" coords="695,112,70">
+        <area id="zona_sensible9" shape="circ" coords="889,112,70">
+        <area id="zona_sensible10" shape="circ" coords="82,286,70">
+        <area id="zona_sensible11" shape="circ" coords="288,286,70">
+        <area id="zona_sensible12" shape="circ" coords="498,286,70">
+        <area id="zona_sensible13" shape="circ" coords="695,286,70">
+        <area id="zona_sensible14" shape="circ" coords="889,286,70">
+      </map>
+    </div>
+  </div>
+</div>
+<div class="mas_personaje c_1">
+  <h1></h1>
+  <div class="item_c"></div>
+</div>
+<div class="c_principal c_2_6">
+  <h1 data-posabsbtn="700,220">Modalidades de fraude</h1>
+  <div class="item_c">
+    <h1></h1>
+  </div>
+  <div class="item_c" style="margin: 0 30px;">
+    <div class="txt_interno c_1">
+      <h1>Inicio</h1>
+      <div class="item_c">
+        <div class='instruccion_interna'><span class='indica_instclic'></span>Pulsa los botones para conocer cada una de las modalidades de fraude.</div>
+      </div>
+    </div>
+    <div class="txt_interno c_3">
+      <h1>Cambiazo </h1>
+      <div class="item_c">
+        <div class="cont_audio">
+          <div class="audio_c">
+            <audio controls style="margin-top: 15px;">
+              <source src="sounds/diap13a.mp3" type="audio/mpeg">
+              Your browser does not support the audio tag. </audio>
+          </div>
+          <div class="subs_audio">
+            <div class="resaltado_especial">Táctica fraudulenta diseñada para <span class="negrilla">apropiarse del chip de una tarjeta de crédito o débito</span>, robar la información y hacer compras no autorizadas. </div>
+            <div>El cambiazo puede suceder en las siguientes situaciones:</div>
+          </div>
+        </div>
+        <div class="txt_c">
+          <div class="infografia"> <img src="images/diap13.png" height="180">
+            <map data-restriccion="no">
+              <area id="zona_sensible15" shape="circ" coords="425,137,70">
+              <area id="zona_sensible16" shape="circ" coords="609,137,70">
+              <area id="zona_sensible17" shape="circ" coords="789,137,70">
+            </map>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="txt_interno c_1_1">
+      <h1><em>Swapping</em></h1>
+      <div class="item_c">
+        <div class="cont_audio">
+          <div class="audio_c">
+            <audio controls style="margin-top: 15px;">
+              <source src="sounds/diap14.mp3" type="audio/mpeg">
+              Your browser does not support the audio tag. </audio>
+          </div>
+          <div class="subs_audio">Práctica fraudulenta en la que los delincuentes solo necesitan conocer número de celular, fecha de nacimiento y dirección para suplantar a una persona frente a su compañía telefónica. Luego solicitan la <span class="negrilla">copia de la SIM</span> a una nueva dirección.</div>
+        </div>
+      </div>
+      <div class="item_c"> <img src="images/diap14.png" height="300"> </div>
+    </div>
+    <div class="txt_interno c_1_1">
+      <h1><em>Vishing</em></h1>
+      <div class="item_c">
+        <div class="cont_audio">
+          <div class="audio_c">
+            <audio controls style="margin-top: 15px;">
+              <source src="sounds/diap15.mp3" type="audio/mpeg">
+              Your browser does not support the audio tag. </audio>
+          </div>
+          <div class="subs_audio">En el <em>vishing</em>, los delincuentes intentan ganar la confianza de la víctima <span class="negrilla">llamando y haciéndose pasar por funcionarios del banco</span>; para lograrlo, le darán información parcial de sus productos financieros o datos personales que obtuvieron usando programas maliciosos e ingeniería social.</div>
+        </div>
+      </div>
+      <div class="item_c"> <img src="images/diap15.png" height="300"> </div>
+    </div>
+    <div class="txt_interno c_1_1">
+      <h1><em>Phishing</em></h1>
+      <div class="item_c">
+        <div class="cont_audio">
+          <div class="audio_c">
+            <audio controls style="margin-top: 15px;">
+              <source src="sounds/diap16.mp3" type="audio/mpeg">
+              Your browser does not support the audio tag. </audio>
+          </div>
+          <div class="subs_audio">En el <em>phishing</em>, a través de un <span class="negrilla">correo electrónico</span> que incluye un enlace a un sitio fraudulento, se suplantan entidades financieras confiables, agencias gubernamentales o plataformas de pagos en línea, y se solicita a la víctima que actualice sus datos confidenciales, asegurando que existen problemas con sus cuentas bancarias, una transacción o un envío. Una vez la víctima entrega la información, los criminales pueden adueñarse de su dinero.</div>
+        </div>
+      </div>
+      <div class="item_c"> <img src="images/diap16.png" height="300"> </div>
+    </div>
+    <div class="txt_interno c_1_1">
+      <h1><em>Smishing</em></h1>
+      <div class="item_c">
+        <div class="cont_audio">
+          <div class="audio_c">
+            <audio controls style="margin-top: 15px;">
+              <source src="sounds/diap17.mp3" type="audio/mpeg">
+              Your browser does not support the audio tag. </audio>
+          </div>
+          <div class="subs_audio">El <em>smishing</em> es una modalidad de fraude que consiste en el envío de <span class="negrilla">mensajes de texto </span>al teléfono móvil, los cuales contienen enlaces que conducen a sitios fraudulentos o infectados, con el fin de obtener información personal de las víctimas y cometer estafas financieras.</div>
+        </div>
+      </div>
+      <div class="item_c"> <img src="images/diap17.png" height="300"> </div>
+    </div>
+  </div>
+</div>
+<div class="c_principal c_1">
+  <h1 data-posabsbtn="170,320">Recomendaciones para evitar ser víctima de fraude</h1>
+  <div class="item_c">
+    <div class="cont_audio">
+      <div class="audio_c">
+        <audio controls style="margin-top: 15px;">
+          <source src="sounds/diap19a.mp3" type="audio/mpeg">
+          Your browser does not support the audio tag. </audio>
+      </div>
+      <div class="subs_audio"> Para evitar el fraude se deben tener en cuenta las siguientes consideraciones: </div>
+    </div>
+    <div class="infografia"> <img src="images/diap19.png" height="250">
+      <map data-restriccion="no">
+        <area id="zona_sensible18" shape="circ" coords="88,436,70">
+        <area id="zona_sensible19" shape="circ" coords="126,248,70">
+        <area id="zona_sensible20" shape="circ" coords="232,94,70">
+        <area id="zona_sensible21" shape="circ" coords="472,94,70">
+        <area id="zona_sensible22" shape="circ" coords="576,252,70">
+        <area id="zona_sensible23" shape="circ" coords="611,439,70">
+      </map>
+    </div>
+  </div>
+</div>
+<div class="c_principal c_1-1">
+  <h1  data-posabsbtn="700,220">Actividad</h1>
+  <div class="item_c">
+    <div class="txt_c">
+      <table style="text-align: center; margin: auto; width: 800px;">
+        <td><div class="cont_audio">
+              <div class="audio_c">
+                <audio controls style="margin-top: 15px;">
+                  <source src="sounds/diap21.mp3" type="audio/mpeg">
+                  Your browser does not support the audio tag. </audio>
+              </div>
+              <div class="subs_audio">
+                <div>¡Hemos encontrado a Gerard! Ahora debemos recuperar los tesoros de la ciudad aplicando todo lo que hemos aprendido.</div>
+                <div>Pulsa el botón "Ir a las preguntas" para resolver algunas actividades.</div>
+              </div>
+            </div></td>
+          <td style="width: 240px;"><img src="images/diap21.png" height="300"></td>
+      </table>
+    </div>
+  </div>
+  <div class="item_c">
+    <div class="boton_siguiente">
+      <div id="txt_btnsig2">IR A LAS PREGUNTAS </div>
+    </div>
+  </div>
+</div>
+<div id="pop0" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap6b.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  Las entidades que rigen y garantizan el cumplimiento de los reglamentos asociados a temas de fraude son la Superintendencia Financiera de Colombia (SFC) y el Ministerio de Comercio, Industria y Turismo (MinCIT). </div>
+<div id="pop1" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap7b.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  Canales, medios, seguridad y calidad en el manejo de información en la prestación de servicios financieros. </div>
+<div id="pop2" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap7c.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  Actuaciones ante la Superintendencia de Colombia. Establece instrucciones generales, aplicables, deberes y responsabilidades de las entidades vigiladas. </div>
+<div id="pop3" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap7d.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  Obligaciones especiales de las entidades vigiladas. </div>
+<div id="pop4" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap7e.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  Requerimientos mínimos de seguridad y calidad para la realización de operaciones. </div>
+<div id="pop5" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap10b.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  <span class="negrilla">Suplantación</span><br>
+  <br>
+  Situación en la que se completa una solicitud con información legítima de una persona real, aunque esta fue utilizada sin el consentimiento del tercero. Excluye todas las pérdidas de crédito por fraude directo. </div>
+<div id="pop6" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap10c.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  <span class="negrilla">Pérdida o robo</span><br>
+  <br>
+  Cuando el tarjetahabiente extravía su tarjeta o la tarjeta es robada por un tercero. </div>
+<div id="pop7" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap10d.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  <span class="negrilla">Falsificación de banda (<em>skimming</em>)</span><br>
+  <br>
+  Cuando se comete fraude en una transacción en persona a raíz del uso de una tarjeta con banda copiada. </div>
+<div id="pop8" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap10e.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  <span class="negrilla">Tarjeta no presente</span><br>
+  <br>
+  Situación en la que un cliente usa una tarjeta para hacer una compra por internet o telefónicamente. </div>
+<div id="pop9" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap10f.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  <span class="negrilla">Tarjeta no recibida</span><br>
+  <br>
+  Situación en la que una tarjeta enviada a un cliente es interceptada y usada de manera ilícita. </div>
+<div id="pop10" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap10g.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  <span class="negrilla">Introducción Manual (MOTO)</span><br>
+  <br>
+  Cuando el número de la tarjeta de crédito se introduce manualmente (por teléfono o en una interacción en persona). </div>
+<div id="pop11" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap10h.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  <span class="negrilla">Posesión de cuenta</span><br>
+  <br>
+  Pérdidas por fraude externo debido a la adquisición/uso no autorizado de una cuenta legítimamente establecida (excluye las pérdidas relacionadas con todos los productos de la tarjeta de crédito y débito / cajero automático). </div>
+<div id="pop12" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap10i.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  <span class="negrilla"> Fraude en cheque</span><br>
+  <br>
+  <table class="lista_vinetas">
+    <tr>
+      <td class="vineta"></td>
+      <td> Pérdidas por fraude externo debido a cheques perdidos o robados. </td>
+    </tr>
+    <tr>
+      <td class="vineta"></td>
+      <td> Cheques alterados con firmas falsificadas por las diferentes modalidades como calco, scanner, imitación, etc. </td>
+    </tr>
+    <tr>
+      <td class="vineta"></td>
+      <td> Fraude de primera parte por parte del cliente que aprovecha el canje para hacer uso de los fondos inexistentes en una cuenta corriente u otra cuenta bancaria. </td>
+    </tr>
+  </table>
+</div>
+<div id="pop13" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap10j.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  <span class="negrilla">Tarjeta falsa</span><br>
+  <br>
+  Cuando se comete fraude en una transacción en persona a raíz del uso de una tarjeta clasificada o modificada manualmente. </div>
+<div id="pop14" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap10k.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  <span class="negrilla"> Fraude interno</span><br>
+  <br>
+  Evento de fraude que implica al menos una parte interna, ya sea un empleado permanente, temporal, trabajador contingente o con contrato directo. Pérdidas por fraude con participación por lo menos de una parte interna. </div>
+<div id="pop15" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap13b.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  En un cajero electrónico mientras se realiza alguna consulta o transacción. </div>
+<div id="pop16" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap13c.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  En un establecimiento comercial mientras se entrega la tarjeta para procesar el pago. </div>
+<div id="pop17" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap13d.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  Cuando los ladrones aparentan ser funcionarios de la entidad financiera para robar.</div>
+<div id="pop18" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap19b.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  No perder de vista las tarjetas crédito o débito al momento de efectuar pagos. </div>
+<div id="pop19" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap19c.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  No permitir la visualización de la clave de seguridad al momento de digitarla. </div>
+<div id="pop20" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap19d.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  No aceptar ayuda de terceros cuando se realicen transacciones en cajeros automáticos. </div>
+<div id="pop21" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap19e.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  El Banco nunca contactará para solicitar información de seguridad de productos financieros (claves, fechas de vencimiento, códigos de seguridad y OTP). </div>
+<div id="pop22" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap19f.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  El Banco en el momento no posee campañas de devolución de IVA, auxilios o fortalecimiento de procesos de seguridad. </div>
+<div id="pop23" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap19g.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  No facilitar información bancaria sensible por medio telefónico o digital. </div>
+<div id="pop24" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  El reembolso de gastos por bebidas alcohólicas deberá ser aprobado por el jefe inmediato, por quien haga sus veces o por quien cada entidad designe, y, por lo menos, deberá cumplir con las políticas de reembolso de gastos por este concepto y asegurando la proporcionalidad del gasto. <br>
+  Si el reembolso es solicitado por la Presidencia, será autorizado por la Vicepresidencia Financiera. </div>
+<div id="pop25" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  El presidente, quien haga sus veces o quienes este delegue podrán aprobar: <br>
+  <span class="negrilla"> Regalo o invitación superior a 4 SMMLV</span> </div>
+<div id="pop26" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  Los vicepresidentes, quienes hagan sus veces o quienes estos deleguen podrán aprobar: <br>
+  <span class="negrilla"> Regalo o invitación entre 2 y 4 SMMLV</span> </div>
+<div id="pop27" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  Los gerentes o quienes hagan sus veces podrán aprobar: <br>
+  <span class="negrilla"> Regalo o invitación entre 0,5 y hasta 2 SMMLV</span> </div>
+<div id="pop28" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  Diligenciar los formatos <span class="negrilla">Solicitud para otorgar o recibir regalos e invitaciones y Cierre Recibo y Otorgamiento de Regalos e Invitaciones</span>, y junto con su aprobación entregarlos a la Dirección ABAC para emisión de concepto. </div>
+<div id="pop29" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  Reportar en la<span class="negrilla"> Bitácora de registro</span>, publicada en la página de Enlace Virtual. </div>
+<div id="pop30" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  Queda expresamente prohibido utilizar figuras como publicidad, pago de eventos a favor de terceros, comodatos, regalos, invitaciones, publicidad, patrocinios y/o donaciones como parte de las reciprocidades con clientes. </div>
+<div id="pop31" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  <span class="negrilla">Programas de fidelización</span> no se consideran reciprocidades y deberán cumplir con los mínimos requeridos desde el punto de vista NIIF para su registro como tal. </div>
+<div id="pop32" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  El ofrecimiento de <span class="negrilla">beneficios a clientes</span> debe estar soportado y documentado en un análisis de relación costo/beneficio, de cara al portafolio completo del cliente. Si el retorno realizado con un cliente se desfasa por debajo de la media esperada, se debe contar con autorización expresa de la instancia superior que corresponda. </div>
+<div id="pop33" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+  Está prohibido que el Banco Popular y sus filiales realicen <span class="negrilla">comodatos</span> a clientes o proveedores. Si por alguna consideración excepcional contractual se hace necesario otorgar bienes bajo esta figura, todos, sin excepción y de manera individual, deben ser previamente autorizados por la Gerencia de Cumplimiento – Dirección ABAC, basados en documentación robusta de cada operación suministrada por la primera línea de defensa a cargo de dicha transacción. </div>
+<div id="pop3" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+</div>
+<div id="pop3" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+</div>
+<div id="pop3" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+</div>
+<div id="pop3" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+</div>
+<div id="pop3" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+</div>
+<div id="pop3" class="pop">
+  <div class="cont_audio">
+    <div class="audio_c">
+      <audio controls style="margin-top: 15px;">
+        <source src="sounds/diap.mp3" type="audio/mpeg">
+        Your browser does not support the audio tag. </audio>
+    </div>
+    <div class="subs_audio"></div>
+  </div>
+</div>
+</body>
+</html>
